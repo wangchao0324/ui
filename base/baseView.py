@@ -8,7 +8,7 @@ import requests
 from selenium.webdriver.support.wait import WebDriverWait
 from appium.webdriver.common.touch_action import TouchAction
 import logging
-from base.config import SetupConfig
+# from base.config import SetupConfig
 
 class BaseView():
 
@@ -18,12 +18,19 @@ class BaseView():
     # logging=logging.getLogger()
     # 封装成一个方法
     def appium_start(bao):
-        if bao =="cn.v6.xiuchang":
-            desired_caps = SetupConfig.xiuchang
-        elif bao == "cn.v6.sixrooms":
-            desired_caps = SetupConfig.sixrooms
-        elif bao == "linayun":
-            pass
+        # if bao =="cn.v6.xiuchang":
+        #     desired_caps = SetupConfig.xiuchang
+        # elif bao == "cn.v6.sixrooms":
+        #     desired_caps = SetupConfig.sixrooms
+        # elif bao == "linayun":
+        #     pass
+        desired_caps = {
+                'platformName': 'Android',
+                # 'deviceName': '6EB0217522006289',
+                'appPackage': "cn.v6.xiuchang",
+                'appActivity': "cn.v6.sixrooms.ui.phone.SplashActivity",
+                "noReset": True
+            }
         driver = webdriver.Remote('http://127.0.0.1:4723/wd/hub', desired_caps)
         driver.implicitly_wait(20)
         return driver
